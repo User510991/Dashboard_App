@@ -1,5 +1,5 @@
 # Homme.py
-# Homme.py: Home
+# Homme: Home
 import streamlit as st
 
 # Définir le titre de la page

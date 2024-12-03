@@ -9,7 +9,7 @@ import plotly.express as px
 
 
 # Charger le fichier Excel
-fichier_excel = r"e:\0_ISSEA_Formation\Dashboard Apps_contest\5_Base_dv.xlsx"#"c:\Users\REYDEYSCHIAS\Desktop\Base_dv.xlsx"#"e:\0_ISSEA_Formation\Dashboard Apps_contest\Final_Base_Emploi_Insertion.xlsx"#"e:\0_ISSEA_Formation\Dashboard Apps_contest\Final_Base_Emploi_Insertion.xlsx"#"e:\0_ISSEA_Formation\Dashboard Apps_contest\Final_Def_Base_Emploi_Insertion.xlsx""c:\Users\REYDEYSCHIAS\Desktop\Base_dv.xlsx"#
+fichier_excel = "https://raw.githubusercontent.com/User510991/Dashboard_App/refs/heads/main/5_Base_dv.xlsx"#"c:\Users\REYDEYSCHIAS\Desktop\Base_dv.xlsx"#"e:\0_ISSEA_Formation\Dashboard Apps_contest\Final_Base_Emploi_Insertion.xlsx"#"e:\0_ISSEA_Formation\Dashboard Apps_contest\Final_Base_Emploi_Insertion.xlsx"#"e:\0_ISSEA_Formation\Dashboard Apps_contest\Final_Def_Base_Emploi_Insertion.xlsx""c:\Users\REYDEYSCHIAS\Desktop\Base_dv.xlsx"#
 
 # Utiliser ExcelFile pour accéder aux métadonnées du fichier
 excel = pd.ExcelFile(fichier_excel)

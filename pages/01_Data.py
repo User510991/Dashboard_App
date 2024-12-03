@@ -6,7 +6,7 @@ import pandas as pd
 import streamlit as st
 
 # Chemin d'accès au fichier Excel
-file_path = r"https://github.com/User510991/Dashboard_App/blob/main/Base_dv.xlsx"
+file_path = "https://raw.githubusercontent.com/User510991/Dashboard_App/main/Base_dv.xlsx"
 
 # Charger le classeur Excel pour obtenir les noms des feuilles
 xls = pd.ExcelFile(file_path)

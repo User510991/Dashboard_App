@@ -402,7 +402,7 @@ def nuage(df1,df2,var_x,var_y,color1=None):
 
 #################################GRAPHIQUES########################################################
 
-col = st.columns(4, gap='medium')
+col = st.columns(2, gap='medium')
 with col[0]:
     df1=filtrer_donne_sur_graphique(dict_data['V20'],variables=['Region'],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa']])
     df2=filtrer_donne_sur_graphique(dict_data['V1'],variables=['Region'],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa']])
@@ -418,7 +418,7 @@ with col[0]:
     st.plotly_chart(tracer_ligne(df1,"year","pays"))#"classif1.label")
     df1=filtrer_donne_sur_graphique(dict_data["V1"],variables=["Region","year"],valeurs=[['Southern Africa'],[2021]])
     st.plotly_chart(tracer_bar(df1,"pays",colcible(df1),var_couleur=None,type=0))
-with col[1]:
+#with col[1]:
     df1=filtrer_donne_sur_graphique(dict_data["V1"],variables=["pays","year","sex.label",'classif1.label'],valeurs=[['South Africa'],[2021],['Sex: Male', 'Sex: Female'],['Age (Youth, adults): 15-24','Age (Youth, adults): 25+']])
     st.plotly_chart(tracer_bar(df1,"sex.label",colcible(df1),var_couleur='classif1.label',type=0,typemode=1))
     df1=filtrer_donne_sur_graphique(dict_data["V3"],variables=["pays","year"],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa','North Africa'],list(range(2021,2024))])
@@ -433,7 +433,7 @@ with col[1]:
     #Proportion des femmes occupant des postes d'encadrement Sup et Intermdiaire
     df1=filtrer_donne_sur_graphique(dict_data["V6"],variables=["pays"],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa','North Africa','Afrique(All)']])
     st.plotly_chart(tracer_ligne(df1,"year","pays"))
-with col[2]:
+with col[1]:
     #Comparaison des salaires horaires moyens par sexe.
     df1=filtrer_donne_sur_graphique(dict_data["V17"],variable_ouverts=["sex.label"])
     st.plotly_chart(tracer_ligne(df1,"year","sex.label"))
@@ -448,7 +448,7 @@ with col[2]:
     st.plotly_chart(tracer_ligne(df1,"year","pays"))
     df1=filtrer_donne_sur_graphique(dict_data["V19"],variables=["pays"],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa','North Africa','Afrique(All)']])#,variable_ouverts=["sex.label"])
     st.plotly_chart(tracer_ligne(df1,"year","pays"))
-with col[3]:
+#with col[3]:
     df1=filtrer_donne_sur_graphique(dict_data["V10"],variables=["pays"],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa','North Africa','Afrique(All)']])#,variable_ouverts=["sex.label"])
     st.plotly_chart(tracer_ligne(df1,"year","pays"))
     df1=filtrer_donne_sur_graphique(dict_data["V5"],variables=["pays","year"],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa','North Africa','Afrique(All)'],list(range(2000,2024))])#,variable_ouverts=["sex.label"])

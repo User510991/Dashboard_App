@@ -80,7 +80,7 @@ Vous avez en plus la possibilité de selectionner une année de votre choix et u
 
 ######################## Charger la base de donnees#############################
 
-file_path = r"https://github.com/User510991/Dashboard_App/blob/main/Base_dv.xlsx"
+file_path = "https://raw.githubusercontent.com/User510991/Dashboard_App/main/Base_dv.xlsx"
 feuille1 = pd.read_excel(file_path, sheet_name='V1')
 
 ####################### Configuration de la page #################################

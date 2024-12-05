@@ -1,11 +1,5 @@
 import streamlit as st
 
-# Initialisation de la session pour le thème global
-from theme_utils import apply_theme
-
-# Interface utilisateur pour choisir le thème global
-if "theme" not in st.session_state:
-    st.session_state["theme"] = "Clair"  # Thème par défaut
 
 st.title("Bienvenue dans l'application avec Thèmes Dynamiques")
 

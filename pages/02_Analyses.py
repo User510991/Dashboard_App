@@ -9,8 +9,7 @@ import plotly.express as px
 from theme_utils import apply_theme
 
 
-# Appliquer le thème global
-chart_template = apply_theme()
+
 #import plotly.io as pio
 
 # Définir le thème par défaut
@@ -23,7 +22,8 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 #alt.themes.enable("dark")
-
+# Appliquer le thème global
+chart_template = apply_theme()
 #######################
 
 

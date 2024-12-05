@@ -6,8 +6,12 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 import plotly.express as px
+from theme_utils import apply_theme
 
-import plotly.io as pio
+
+# Appliquer le thème global
+chart_template = apply_theme()
+#import plotly.io as pio
 
 # Définir le thème par défaut
 #pio.templates.default = "plotly_dark"

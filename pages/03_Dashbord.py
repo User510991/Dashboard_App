@@ -7,8 +7,7 @@ import plotly.express as px
 from theme_utils import apply_theme
 
 
-# Appliquer le thème global
-chart_template = apply_theme()
+
 #######################
 # Page configuration
 st.set_page_config(
@@ -18,7 +17,8 @@ st.set_page_config(
     initial_sidebar_state="expanded")
 
 #alt.themes.enable("dark")
-
+# Appliquer le thème global
+chart_template = apply_theme()
 #######################
 # CSS styling
 st.markdown("""

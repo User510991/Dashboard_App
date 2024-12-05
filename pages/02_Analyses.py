@@ -404,12 +404,6 @@ def nuage(df1,df2,var_x,var_y,color1=None):
 
 col = st.columns(2, gap='medium')
 with col[0]:
-    df1=filtrer_donne_sur_graphique(dict_data['V20'],variables=['Region'],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa']])
-    df2=filtrer_donne_sur_graphique(dict_data['V1'],variables=['Region'],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa']])
-    st.plotly_chart(nuage(df1,df2,colcible(df1)+"_x",colcible(df2)+"_y","Region"))
-    df1=filtrer_donne_sur_graphique(dict_data['V20'],variables=['Region'],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa']])
-    df2=filtrer_donne_sur_graphique(dict_data['V1'],variables=['Region'],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa']])
-    st.plotly_chart(nuage(df1,df2,colcible(df1)+"_x",colcible(df2)+"_y","pays"))
     #SExe
     df1=filtrer_donne_sur_graphique(dict_data["V1"],variable_ouverts=["sex.label"])
     st.plotly_chart(tracer_ligne(df1,"year","sex.label"))
@@ -418,6 +412,11 @@ with col[0]:
     st.plotly_chart(tracer_ligne(df1,"year","pays"))#"classif1.label")
     df1=filtrer_donne_sur_graphique(dict_data["V1"],variables=["Region","year"],valeurs=[['Southern Africa'],[2021]])
     st.plotly_chart(tracer_bar(df1,"pays",colcible(df1),var_couleur=None,type=0))
+    df1=filtrer_donne_sur_graphique(dict_data["V17"],variable_ouverts=["sex.label"])
+    st.plotly_chart(tracer_ligne(df1,"year","sex.label"))
+    #Taux de participation des jeunes à l'apprentissage par le travail.
+    df1=filtrer_donne_sur_graphique(dict_data["V5"],variables=["pays",'year'],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa','North Africa','Afrique(All)'],[2016,2017,2018]])#,variable_ouverts=["sex.label"])
+    st.plotly_chart(tracer_bar(df1,"year",colcible(df1),'pays',typemode=1,type=0))
 #with col[1]:
     df1=filtrer_donne_sur_graphique(dict_data["V1"],variables=["pays","year","sex.label",'classif1.label'],valeurs=[['South Africa'],[2021],['Sex: Male', 'Sex: Female'],['Age (Youth, adults): 15-24','Age (Youth, adults): 25+']])
     st.plotly_chart(tracer_bar(df1,"sex.label",colcible(df1),var_couleur='classif1.label',type=0,typemode=1))
@@ -435,11 +434,7 @@ with col[0]:
     st.plotly_chart(tracer_ligne(df1,"year","pays"))
 with col[1]:
     #Comparaison des salaires horaires moyens par sexe.
-    df1=filtrer_donne_sur_graphique(dict_data["V17"],variable_ouverts=["sex.label"])
-    st.plotly_chart(tracer_ligne(df1,"year","sex.label"))
-    #Taux de participation des jeunes à l'apprentissage par le travail.
-    df1=filtrer_donne_sur_graphique(dict_data["V5"],variables=["pays",'year'],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa','North Africa','Afrique(All)'],[2016,2017,2018]])#,variable_ouverts=["sex.label"])
-    st.plotly_chart(tracer_bar(df1,"year",colcible(df1),'pays',typemode=1,type=0))
+
     #Proportion de jeunes ne suivant pas d'études, d'emploi ou de formation
     df1=filtrer_donne_sur_graphique(dict_data["V9"],variables=["pays"],valeurs=[['Central Africa', 'East Africa', 'West Africa', 'Southern Africa','North Africa','Afrique(All)']])#,variable_ouverts=["sex.label"])
     st.plotly_chart(tracer_ligne(df1,"year","pays"))

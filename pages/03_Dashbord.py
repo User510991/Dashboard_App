@@ -4,7 +4,7 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 import plotly.express as px
-from theme_utils import apply_theme
+
 
 
 
@@ -16,10 +16,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
-#alt.themes.enable("dark")
-# Appliquer le thème global
-chart_template = apply_theme()
-#######################
+
 
 #################################Description du Tableau de Bord########################################
 st.title("Tableau de Bord de la Situation de L'emploi en AFrique")

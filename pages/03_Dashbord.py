@@ -13,7 +13,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
-alt.themes.enable("dark")
+#alt.themes.enable("dark")
 
 #######################
 # CSS styling
@@ -77,11 +77,86 @@ Ce tableau de bord met en lumière un ensemble de 4 indicateurs pour une année 
 
 Vous avez en plus la possibilité de selectionner une année de votre choix et une couleur aussi.
 """)
+######################## Definition des fonctions #######################################
+def arranger_data(data):
+    df=data
+    try:
+        a=df["pays"].unique()
+        print("pays:",a)
+    except:
+        try:
+            df["pays"]=df["ref_area.label"]
+            df=df.drop(columns="ref_area.label")
+            print("ref_area",a)  
+        except:
+            try:
+                df["pays"]=df["Country"]
+                df=df.drop(columns="Country")
+                print("Country",a)
+                
+            except:
+                print("#############ERROR###########")
+    try:
+        a=df["year"].unique()
+        print("year",a)
+    except:
+        df["year"]=df["time"]
+        df=df.drop(columns="time")
+    return df
+def scinder_str(string):
+    return(string.split(": "))
+def colcible(df):
+    for i in df.columns:
+        if df[i].dtype=="float64" and i not in ["id","year"]:
+            return i
+    return None
+
+def default_fixed(df, var_ouvertes=[]):
+    for i in df.columns:
+        try:
+            if (i not in var_ouvertes) and (i not in ["year","pays"]) :
+                l=df[i].unique()
+                #print(l)
+                a=1
+                for j in l:
+                    a=scinder_str(j)
+                    #print(a)
+                    if ("Total" in a) or ("Total" in a[1]) :
+                        val_to_fix=j
+                        a=0
+                        print(j)
+                        break
+                    
+                if a:
+                    val_to_fix=l[0]
+                df1=df[df[i]==val_to_fix]
+                p=df1[i][df1[i].index[0]]
+                df=df1        
+        except:
+            #print("##########",i,df[i][0])
+            continue
+    return(df)
+def valeur_fixe(df, variables=[],values=[]):
+    for i in range(len(variables)):
+        df=df[df[variables[i]].isin(values[i])]
+    return df
+# Exemple de filtration des données
+def filtrer_donne_sur_graphique(df,variables=[],valeurs=[],variable_ouverts=[],manquantes:bool=True):
+    df1=valeur_fixe(df,variables,valeurs)
+    df2=default_fixed(df1,var_ouvertes=variables+variable_ouverts)
+    if manquantes:
+        if list(df2["year"])==[]:
+            return df2
+        print(df2["year"].min())
+        annees_completes = pd.DataFrame({"year": range(int(df2["year"].min()), int(df2["year"].max()) + 1)})
+        df2 = pd.merge(annees_completes, df2, on="year", how="left")
+    return df2
 
 ######################## Charger la base de donnees#############################
 
 file_path = "https://raw.githubusercontent.com/User510991/Dashboard_App/main/Base_dv.xlsx"
 feuille1 = pd.read_excel(file_path, sheet_name='V1')
+feuille1=filtrer_donne_sur_graphique(arranger_data(feuille1))
 
 ####################### Configuration de la page #################################
 # Sidebar
@@ -189,14 +264,14 @@ with st.sidebar:
     #selected_year = st.selectbox('Select a year', year_list)
 
 # Créer des colonnes pour l'affichage
-col = st.columns((1, 4.5, 2), gap='medium')
+col = st.columns((2, 6, 3), gap='medium')
 
 with col[0]:
     st.markdown('#### PIB(%)')
 
     # Charger la feuille V17
     feuille17 = pd.read_excel(file_path, sheet_name='V17')
-
+    feuille17=filtrer_donne_sur_graphique(arranger_data(feuille17))
     # Remplacer les valeurs manquantes par 0 dans la colonne PIB
     feuille17['PIB'] = feuille17['PIB'].fillna(0)
 
@@ -225,11 +300,11 @@ with col[0]:
             # Afficher les résultats
             st.metric(label=f"{pays_max_pib} (Haut)", 
                        value=str(max_pib),
-                       delta="↑")  # Flèche montante pour le max
+                       delta="Max")  # Flèche montante pour le max
 
             st.metric(label=f"{pays_min_pib} (Bas)", 
                        value=str(min_pib),
-                       delta="-↓")  # Flèche descendante pour le min
+                       delta="-Min")  # Flèche descendante pour le min
         else:
             st.warning("Aucune donnée disponible pour l'année sélectionnée.")
     else:
@@ -244,6 +319,7 @@ with col[1]:
 
 ####################### Poids de l'informel en afrique ##########################################
     feuille3 = pd.read_excel(file_path, sheet_name='V3')
+    feuille3=filtrer_donne_sur_graphique(arranger_data(feuille3))
     feuille3_selected_year = feuille3[feuille3.year == selected_year]
     feuille3_selected_year_sorted = feuille3_selected_year.sort_values(by= "Emploi_informel", ascending=False)
     st.markdown("#### Part de L'informel")
@@ -252,6 +328,7 @@ with col[1]:
     
 #Stats sur la proportion des jeunes de 15 a 24 ans sans emploi, mais qui ne frequentent pas ou suivent une formation  ####################################################################
 feuille9 = pd.read_excel(file_path, sheet_name='V9')
+feuille9=filtrer_donne_sur_graphique(arranger_data(feuille9))
 feuille9_selected_year = feuille9[feuille9.year == selected_year]
 feuille9_selected_year_sorted = feuille9_selected_year.sort_values(by= "Jeune_sans_emploi", ascending=False)
 with col[2]:

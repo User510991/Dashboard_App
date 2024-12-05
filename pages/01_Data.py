@@ -1,11 +1,10 @@
 import streamlit as st
-from theme_utils import apply_theme
+#from theme_utils import apply_theme
 import plotly.express as px
 import pandas as pd
 
 
-# Appliquer le thème global
-chart_template = apply_theme()
+
 st.subheader("Visualisation de la base de données")
 
 def arranger_data(data):

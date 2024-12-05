@@ -9,12 +9,6 @@ if "theme" not in st.session_state:
 
 st.title("Bienvenue dans l'application avec Thèmes Dynamiques")
 
-# Choix du thème global
-st.session_state["theme"] = st.radio(
-    "Choisissez un thème global (Pages et Graphiques) :",
-    ["Clair", "Sombre"],
-    index=0 if st.session_state["theme"] == "Clair" else 1
-)
 # Appliquer le thème
 chart_template = apply_theme()
 def main():

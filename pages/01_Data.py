@@ -1,5 +1,6 @@
 import streamlit as st
-
+# Appliquer le thème global
+chart_template = apply_theme()
 st.subheader("Visualisation de la base de données")
 
 import pandas as pd

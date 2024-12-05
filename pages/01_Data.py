@@ -121,5 +121,4 @@ st.dataframe(data)  # Affiche les données sous forme de tableau
 # Optionnel : Afficher des statistiques descriptives
 data1=filtrer_donne_sur_graphique(arranger_data(data))
 if st.checkbox("Quelques statistiques descriptives"):
-    st.write(data1.info())
     st.write(data1.describe())

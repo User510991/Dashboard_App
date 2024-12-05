@@ -1,0 +1,8 @@
+[theme]
+base="dark"  # Optionnel, remplacé par le thème utilisateur.
+
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false
